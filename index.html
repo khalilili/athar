@@ -11,6 +11,7 @@
   --card: #1e293b;
   --text: #e5e7eb;
   --accent: #38bdf8;
+  --hover-accent: #60a5fa;
 }
 
 .light {
@@ -18,11 +19,12 @@
   --card: #ffffff;
   --text: #0f172a;
   --accent: #0284c7;
+  --hover-accent: #0369a1;
 }
 
 body {
   margin: 0;
-  font-family: Tahoma, Arial;
+  font-family: Tahoma, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   transition: 0.4s;
@@ -39,6 +41,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.menu-btn:hover {
+  background: var(--hover-accent);
+  transform: scale(1.02);
 }
 
 .toggle {
@@ -55,6 +63,7 @@ body {
   background: var(--card);
   transition: 0.3s;
   z-index: 1000;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.5);
 }
 
 .sidebar a {
@@ -63,11 +72,13 @@ body {
   color: var(--text);
   text-decoration: none;
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
 }
 
 .sidebar a:hover {
-  background: var(--accent);
+  background: var(--hover-accent);
   color: white;
+  transform: scale(1.02);
 }
 
 .content {
@@ -83,6 +94,11 @@ body {
   border-radius: 12px;
   margin-bottom: 20px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 h1 {
@@ -94,10 +110,19 @@ h2 {
   color: var(--accent);
 }
 
+ul {
+  padding-right: 20px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
 @keyframes fade {
   from {opacity:0; transform: translateY(10px);}
   to {opacity:1; transform: translateY(0);}
 }
+
 </style>
 </head>
 
@@ -110,14 +135,11 @@ h2 {
 
 <div class="sidebar" id="sidebar">
   <a href="#" onclick="home()">الرئيسية</a>
-  <a href="#" onclick="grade(5)">الصف الخامس</a>
-  <a href="#" onclick="grade(6)">الصف السادس</a>
-  <a href="#" onclick="grade(7)">الصف السابع</a>
-  <a href="#" onclick="grade(8)">الصف الثامن</a>
-  <a href="#" onclick="grade(9)">الصف التاسع</a>
-  <a href="#" onclick="grade(10)">الصف العاشر</a>
-  <a href="#" onclick="grade(11)">الصف الحادي عشر</a>
-  <a href="#" onclick="grade(12)">الصف الثاني عشر</a>
+  <a href="#" onclick="showSection('free-groups')">مجموعات المبادرة المجانية للصف الثاني عشر</a>
+  <a href="#" onclick="showSection('other-groups')">المجموعات الأخرى</a>
+  <a href="#" onclick="showSection('files')">الملفات</a>
+  <a href="#" onclick="showSection('about-us')">من نحن</a>
+  <a href="#" onclick="showSection('contact')">لتواصل والاستفسار</a>
 </div>
 
 <div class="content" id="content">
@@ -172,14 +194,46 @@ function home(){
   location.reload();
 }
 
-function grade(num){
+function showSection(section){
   toggleMenu();
-  document.getElementById("content").innerHTML = `
-    <h1>الصف ${num}</h1>
-    <div class="card">
-      <p>مرحبًا بطلاب الصف ${num}. سيتم إضافة الدروس والملخصات قريبًا.</p>
-    </div>
-  `;
+  let content = document.getElementById("content");
+  switch(section){
+    case 'free-groups':
+      content.innerHTML = `
+        <h1>مجموعات المبادرة المجانية للصف الثاني عشر</h1>
+        <div class="card">
+          <p>هنا ستجد جميع مجموعات المبادرة المجانية المخصصة للصف الثاني عشر.</p>
+        </div>`;
+      break;
+    case 'other-groups':
+      content.innerHTML = `
+        <h1>المجموعات الأخرى</h1>
+        <div class="card">
+          <p>محتوى المجموعات الأخرى سيضاف هنا قريبًا.</p>
+        </div>`;
+      break;
+    case 'files':
+      content.innerHTML = `
+        <h1>الملفات</h1>
+        <div class="card">
+          <p>يمكنك تحميل الملفات والملخصات التعليمية هنا.</p>
+        </div>`;
+      break;
+    case 'about-us':
+      content.innerHTML = `
+        <h1>من نحن</h1>
+        <div class="card">
+          <p>نحن فريق أثر، نهدف إلى تطوير العملية التعليمية وتسهيل التعلم للطلاب.</p>
+        </div>`;
+      break;
+    case 'contact':
+      content.innerHTML = `
+        <h1>لتواصل والاستفسار</h1>
+        <div class="card">
+          <p>يمكنك التواصل معنا عبر البريد الإلكتروني أو وسائل التواصل الخاصة بنا.</p>
+        </div>`;
+      break;
+  }
 }
 </script>
 
