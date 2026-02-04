@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أثر</title>
 
+<!-- إضافة خط عصري -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
   --bg: #0f172a;
@@ -12,6 +15,7 @@
   --text: #e5e7eb;
   --accent: #38bdf8;
   --hover-accent: #60a5fa;
+  --special: #facc15; /* لون مميز للأزرار الرئيسية */
 }
 
 .light {
@@ -20,11 +24,12 @@
   --text: #0f172a;
   --accent: #0284c7;
   --hover-accent: #0369a1;
+  --special: #f59e0b;
 }
 
 body {
   margin: 0;
-  font-family: Tahoma, Arial, sans-serif;
+  font-family: 'Cairo', Tahoma, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   transition: 0.4s;
@@ -41,12 +46,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background 0.3s, transform 0.2s;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .menu-btn:hover {
   background: var(--hover-accent);
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .toggle {
@@ -57,28 +63,44 @@ body {
 .sidebar {
   position: fixed;
   top: 0;
-  right: -260px;
-  width: 260px;
+  right: -280px;
+  width: 280px;
   height: 100%;
   background: var(--card);
   transition: 0.3s;
   z-index: 1000;
-  box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+  box-shadow: -2px 0 12px rgba(0,0,0,0.5);
+  padding-top: 20px;
+  border-radius: 0 0 0 15px;
 }
 
 .sidebar a {
   display: block;
-  padding: 15px;
+  padding: 15px 20px;
+  margin: 5px 10px;
   color: var(--text);
   text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  font-weight: 600;
   transition: 0.3s;
 }
 
 .sidebar a:hover {
   background: var(--hover-accent);
   color: white;
-  transform: scale(1.02);
+  transform: scale(1.03);
+}
+
+.sidebar a.special {
+  background: var(--special);
+  color: #000;
+  font-weight: bold;
+}
+
+.sidebar a.special:hover {
+  background: #fcd34d;
+  color: #000;
+  transform: scale(1.05);
 }
 
 .content {
@@ -94,20 +116,23 @@ body {
   border-radius: 12px;
   margin-bottom: 20px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.5);
 }
 
 h1 {
   text-align: center;
   color: var(--accent);
+  font-weight: 700;
 }
 
 h2 {
   color: var(--accent);
+  font-weight: 600;
 }
 
 ul {
@@ -122,7 +147,6 @@ li {
   from {opacity:0; transform: translateY(10px);}
   to {opacity:1; transform: translateY(0);}
 }
-
 </style>
 </head>
 
@@ -134,10 +158,10 @@ li {
 </button>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" onclick="home()">الرئيسية</a>
-  <a href="#" onclick="showSection('free-groups')">مجموعات المبادرة المجانية للصف الثاني عشر</a>
-  <a href="#" onclick="showSection('other-groups')">المجموعات الأخرى</a>
-  <a href="#" onclick="showSection('files')">الملفات</a>
+  <a href="#" class="special" onclick="home()">الرئيسية</a>
+  <a href="#" class="special" onclick="showSection('free-groups')">مجموعات المبادرة المجانية للصف الثاني عشر</a>
+  <a href="#" class="special" onclick="showSection('other-groups')">المجموعات الأخرى</a>
+  <a href="#" class="special" onclick="showSection('files')">الملفات</a>
   <a href="#" onclick="showSection('about-us')">من نحن</a>
   <a href="#" onclick="showSection('contact')">لتواصل والاستفسار</a>
 </div>
@@ -181,7 +205,7 @@ li {
 <script>
 function toggleMenu(){
   let s = document.getElementById("sidebar");
-  s.style.right = s.style.right === "0px" ? "-260px" : "0px";
+  s.style.right = s.style.right === "0px" ? "-280px" : "0px";
 }
 
 function toggleTheme(e){
