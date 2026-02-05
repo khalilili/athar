@@ -379,7 +379,6 @@ content.innerHTML=`
 <div class="card">
 <p>اختر الصف للملفات المطلوبة:</p>
 <div class="group-buttons">
-  <!-- الصفوف كرابط مباشر -->
   <button onclick="window.open('https://drive.google.com/drive/folders/1XUFl5ftQxEG1WNKGzziM3Eovxh4-8vlE','_blank')">الصف الخامس</button>
   <button onclick="window.open('https://drive.google.com/drive/folders/1XZbbCZW3q81Pd17ab1M-aw6XqWLIBd0A','_blank')">الصف السادس</button>
   <button onclick="window.open('https://drive.google.com/drive/folders/1Xf2C-TD7v5mOqys3bigFW-3YiyumM9V7','_blank')">الصف السابع</button>
@@ -403,10 +402,12 @@ if(section==="contact"){
 content.innerHTML=`
 <h1>التواصل والاستفسار</h1>
 <div class="card">
-<p>للانضمام إلى قناة التواصل الرسمية أو متابعة حساب فريق أثر على الإنستغرام:</p>
+<p>للانضمام إلى قناة التواصل الرسمية أو متابعة حساب فريق أثر على الإنستغرام، أو نسخ بيانات التواصل:</p>
 <div class="group-buttons">
   <button onclick="window.open('https://whatsapp.com/channel/0029Vb6dRC5EFeXmb5F3VT2a','_blank')">دخول القناة</button>
   <button onclick="window.open('https://www.instagram.com/te_athar7?igsh=MXgweHE4eXNpMWo1Mg%3D%3D&utm_source=qr','_blank')">حساب فريق أثر</button>
+  <button onclick="copyToClipboard('96898993583')">نسخ رقم الواتس أب</button>
+  <button onclick="copyToClipboard('elitet072@gmail.com')">نسخ إيميل الفريق</button>
 </div>
 </div>
 `;
@@ -438,6 +439,15 @@ function addGroupButtonsAnimation(){
       btn.style.opacity=1;
       btn.style.transform="translateY(0)";
     }, i*150);
+  });
+}
+
+// دالة النسخ إلى الحافظة
+function copyToClipboard(text){
+  navigator.clipboard.writeText(text).then(()=>{
+    alert('تم نسخ: ' + text);
+  }).catch(err=>{
+    alert('فشل النسخ: ' + err);
   });
 }
 </script>
