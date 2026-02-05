@@ -5,261 +5,441 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أثر</title>
 
-<!-- إضافة خط عصري -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #0f172a;
-  --card: #1e293b;
-  --text: #e5e7eb;
-  --accent: #38bdf8;
-  --hover-accent: #60a5fa;
-  --special: #facc15; /* لون مميز للأزرار الرئيسية */
+  --bg:#0b0b0c;
+  --card:#121214;
+  --text:#ffffff;
+  --hover-card:#1f1f22;
 }
 
-.light {
-  --bg: #f1f5f9;
-  --card: #ffffff;
-  --text: #0f172a;
-  --accent: #0284c7;
-  --hover-accent: #0369a1;
-  --special: #f59e0b;
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-body {
-  margin: 0;
-  font-family: 'Cairo', Tahoma, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: 0.4s;
+/* صفحة البداية */
+#splash{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:3000;
+  animation:fadeIn 1s ease forwards;
 }
 
-.menu-btn {
-  width: 100%;
-  padding: 15px;
-  background: var(--card);
-  color: var(--text);
-  font-size: 22px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+#splash h1{
+  font-size:64px;
+  margin-bottom:30px;
+  color:var(--text);
+  animation:textPop 1s ease;
 }
 
-.menu-btn:hover {
-  background: var(--hover-accent);
-  transform: scale(1.03);
+#splash button{
+  padding:15px 40px;
+  font-size:22px;
+  font-weight:700;
+  color:var(--text);
+  background:#1a1a1c;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.3s;
 }
 
-.toggle {
-  font-size: 18px;
-  cursor: pointer;
+#splash button:hover{
+  background:#262626;
+  transform:scale(1.05);
 }
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  right: -280px;
-  width: 280px;
-  height: 100%;
-  background: var(--card);
-  transition: 0.3s;
-  z-index: 1000;
-  box-shadow: -2px 0 12px rgba(0,0,0,0.5);
-  padding-top: 20px;
-  border-radius: 0 0 0 15px;
+/* زر القائمة */
+.menu-btn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  width:55px;
+  height:55px;
+  border-radius:16px;
+  background:linear-gradient(145deg,#1c1c1c,#0f0f0f);
+  border:1px solid #2a2a2a;
+  color:var(--text);
+  font-size:24px;
+  cursor:pointer;
+  z-index:2000;
+  transition:.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.6);
 }
 
-.sidebar a {
-  display: block;
-  padding: 15px 20px;
-  margin: 5px 10px;
-  color: var(--text);
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: 600;
-  transition: 0.3s;
+.menu-btn:hover{
+  transform:scale(1.08);
+  background:#222;
 }
 
-.sidebar a:hover {
-  background: var(--hover-accent);
-  color: white;
-  transform: scale(1.03);
+/* القائمة الجانبية */
+.sidebar{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:300px;
+  height:100%;
+  background:#0f0f10;
+  transition:.45s cubic-bezier(.77,0,.18,1);
+  padding-top:80px;
+  z-index:1500;
 }
 
-.sidebar a.special {
-  background: var(--special);
-  color: #000;
-  font-weight: bold;
+/* أزرار القائمة */
+.sidebar a{
+  display:block;
+  margin:10px 15px;
+  padding:16px;
+  border-radius:14px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:700;
+  background:#1a1a1c;
+  border:1px solid #2a2a2a;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.4s;
 }
 
-.sidebar a.special:hover {
-  background: #fcd34d;
-  color: #000;
-  transform: scale(1.05);
+.sidebar.show a{
+  opacity:1;
+  transform:translateY(0);
 }
 
-.content {
-  max-width: 900px;
-  margin: auto;
-  padding: 25px;
-  animation: fade 0.5s;
+.sidebar.show a:nth-child(1){transition-delay:.05s}
+.sidebar.show a:nth-child(2){transition-delay:.1s}
+.sidebar.show a:nth-child(3){transition-delay:.15s}
+.sidebar.show a:nth-child(4){transition-delay:.2s}
+
+.sidebar a:hover{
+  background:#262626;
+  transform:translateX(-6px);
 }
 
-.card {
-  background: var(--card);
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* المحتوى */
+.content{
+  max-width:900px;
+  margin:auto;
+  padding:90px 25px 25px;
+  color:var(--text);
+  opacity:0;
+  animation:contentFade 1s forwards;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:16px;
+  margin-bottom:20px;
+  color:var(--text);
+  opacity:0; 
+  transform:translateY(20px);
+  transition:0.3s;
+  cursor:pointer;
 }
 
-h1 {
-  text-align: center;
-  color: var(--accent);
-  font-weight: 700;
+.card.show{
+  animation:fadeCard 0.6s forwards;
 }
 
-h2 {
-  color: var(--accent);
-  font-weight: 600;
+.card:hover{
+  background:var(--hover-card);
+  transform:translateY(-5px) scale(1.02);
+  box-shadow:0 12px 25px rgba(0,0,0,0.5);
 }
 
-ul {
-  padding-right: 20px;
+h1, h2, h3, p, li{
+  color:var(--text);
 }
 
-li {
-  margin-bottom: 8px;
+ul{
+  padding-right:20px;
 }
 
-@keyframes fade {
-  from {opacity:0; transform: translateY(10px);}
-  to {opacity:1; transform: translateY(0);}
+/* بطاقات المجموعات */
+.group-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  margin-top:15px;
+}
+
+.group-buttons h3{
+  margin-top:25px;
+  color:#38bdf8;
+}
+
+.group-buttons button{
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:var(--card);
+  color:var(--text);
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  transition:0.3s;
+  font-size:18px;
+  text-align:right;
+  opacity:0;
+  transform:translateY(20px);
+}
+
+.group-buttons button:hover{
+  transform:translateY(-5px) scale(1.03);
+  box-shadow:0 12px 25px rgba(0,0,0,0.5);
+}
+
+/* أنميشنات */
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes textPop{
+  0%{transform:scale(0.5);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
+}
+
+@keyframes contentFade{
+  0%{opacity:0; transform:translateY(20px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeCard{
+  0%{opacity:0; transform:translateY(20px);}
+  100%{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<button class="menu-btn" onclick="toggleMenu()">
-  ☰ أثر
-  <span class="toggle" onclick="toggleTheme(event)">🌙</span>
-</button>
-
-<div class="sidebar" id="sidebar">
-  <a href="#" class="special" onclick="home()">الرئيسية</a>
-  <a href="#" class="special" onclick="showSection('free-groups')">مجموعات المبادرة المجانية للصف الثاني عشر</a>
-  <a href="#" class="special" onclick="showSection('other-groups')">المجموعات الأخرى</a>
-  <a href="#" class="special" onclick="showSection('files')">الملفات</a>
-  <a href="#" onclick="showSection('about-us')">من نحن</a>
-  <a href="#" onclick="showSection('contact')">لتواصل والاستفسار</a>
+<!-- صفحة البداية -->
+<div id="splash">
+<h1>أثر</h1>
+<button onclick="startApp()">ابدأ</button>
 </div>
 
-<div class="content" id="content">
+<!-- زر القائمة -->
+<button class="menu-btn" onclick="toggleMenu()">⋮</button>
 
-  <h1>موقع أثر</h1>
+<!-- القائمة الجانبية -->
+<div class="sidebar" id="sidebar">
+  <a href="#" onclick="goHome()">الرئيسية</a>
+  <a href="#" onclick="showSection('free-groups')">مجموعات المبادرة المجانية للصف الثاني عشر</a>
+  <a href="#" onclick="showSection('other-groups')">المجموعات الأخرى</a>
+  <a href="#" onclick="showSection('files')">الملفات</a>
+  <a href="#" onclick="showSection('contact')">التواصل والاستفسار</a>
+</div>
 
-  <div class="card">
-    <h2>من هو فريق أثر؟</h2>
-    <p>فريق أثر هو فريق طلابي يضم العديد من الطلبة المتميزين، يعملون معًا على ترك الأثر ونشر الفائدة.</p>
-  </div>
+<!-- المحتوى الرئيسي -->
+<div class="content" id="content" style="display:none;">
+<h1>موقع أثر</h1>
 
-  <div class="card">
-    <h2>إلى ماذا يهدف فريق أثر؟</h2>
-    <p>يهدف الفريق إلى تصميم الملخصات الدراسية والارتقاء بمستوى الطالب.</p>
-  </div>
+<div class="card">
+<h2>من هو فريق أثر؟</h2>
+<p>فريق أثر هو فريق طلابي يضم العديد من الطلبة المتميزين، يعملون معًا على ترك الأثر ونشر الفائدة.</p>
+</div>
 
-  <div class="card">
-    <h2>خدماتنا</h2>
-    <ul>
-      <li>تصميم وتطوير المناهج التعليمية</li>
-      <li>ورش عمل ودورات تدريبية</li>
-      <li>استشارات تعليمية</li>
-      <li>أدوات تعليمية تفاعلية</li>
-    </ul>
-  </div>
+<div class="card">
+<h2>إلى ماذا يهدف فريق أثر؟</h2>
+<p>يهدف الفريق إلى تصميم الملخصات الدراسية والارتقاء بمستوى الطالب.</p>
+</div>
 
-  <div class="card">
-    <h2>رؤيتنا</h2>
-    <p>أن نكون روادًا في تجربة تعليمية محفزة من خلال ملخصات وسلاسل تعليمية فعالة.</p>
-  </div>
+<div class="card">
+<h2>خدماتنا</h2>
+<ul>
+<li>تصميم وتطوير المناهج التعليمية</li>
+<li>تقديم ورش عمل ودورات تدريبية</li>
+<li>استشارات تعليمية لكافة الطلبة</li>
+<li>تطوير أدوات تعليمية تفاعلية</li>
+</ul>
+</div>
 
-  <div class="card">
-    <h2>رسالتنا</h2>
-    <p>توفير بيئة تعليمية محفزة وداعمة تعتمد على أحدث الأساليب والتقنيات.</p>
-  </div>
+<div class="card">
+<h2>رؤيتنا</h2>
+<p>أن نكون روادًا في توفير تجربة تعليمية محفزة تعزز حب الدراسة والتعلم، من خلال بناء بيئة معرفية ملهمة وإبداعية، تعتمد على تطوير سلاسل تعليمية وملخصات مبسطة وفعالة تسقل المفاهيم وتنمي مهارات التفكير والتعلم الذاتي.</p>
+</div>
+
+<div class="card">
+<h2>رسالتنا</h2>
+<p>توفير بيئة تعليمية محفزة وداعمة تعتمد على أحدث الأساليب التربوية والتقنيات الحديثة، إضافة إلى السلاسل والملفات التعليمية التي تساعد الطالب في مسيرته التعليمية.</p>
+</div>
 
 </div>
 
 <script>
+let sidebar=document.getElementById("sidebar");
+let mainContent = document.getElementById("content").innerHTML;
+
+// بدء التطبيق من صفحة البداية
+function startApp(){
+  document.getElementById("splash").style.display="none";
+  document.getElementById("content").style.display="block";
+  localStorage.setItem("started","true"); 
+  showCardsAnimation();
+}
+
+// تحقق عند فتح الموقع
+window.onload=function(){
+  if(localStorage.getItem("started")){
+    document.getElementById("splash").style.display="none";
+    document.getElementById("content").style.display="block";
+    showCardsAnimation();
+  }
+}
+
 function toggleMenu(){
-  let s = document.getElementById("sidebar");
-  s.style.right = s.style.right === "0px" ? "-280px" : "0px";
+sidebar.classList.toggle("show");
+sidebar.style.right = sidebar.style.right==="0px" ? "-320px" : "0px";
 }
 
-function toggleTheme(e){
-  e.stopPropagation();
-  document.body.classList.toggle("light");
+document.addEventListener("click",function(e){
+let btn=document.querySelector(".menu-btn");
+if(sidebar.style.right==="0px"){
+if(!sidebar.contains(e.target) && !btn.contains(e.target)){
+sidebar.style.right="-320px";
+sidebar.classList.remove("show");
 }
+}
+});
 
-function home(){
-  toggleMenu();
-  location.reload();
+function goHome(){
+document.getElementById("content").style.display="block";
+sidebar.style.right="-320px";
+sidebar.classList.remove("show");
+document.getElementById("content").innerHTML = mainContent;
+showCardsAnimation();
 }
 
 function showSection(section){
-  toggleMenu();
-  let content = document.getElementById("content");
-  switch(section){
-    case 'free-groups':
-      content.innerHTML = `
-        <h1>مجموعات المبادرة المجانية للصف الثاني عشر</h1>
-        <div class="card">
-          <p>هنا ستجد جميع مجموعات المبادرة المجانية المخصصة للصف الثاني عشر.</p>
-        </div>`;
-      break;
-    case 'other-groups':
-      content.innerHTML = `
-        <h1>المجموعات الأخرى</h1>
-        <div class="card">
-          <p>محتوى المجموعات الأخرى سيضاف هنا قريبًا.</p>
-        </div>`;
-      break;
-    case 'files':
-      content.innerHTML = `
-        <h1>الملفات</h1>
-        <div class="card">
-          <p>يمكنك تحميل الملفات والملخصات التعليمية هنا.</p>
-        </div>`;
-      break;
-    case 'about-us':
-      content.innerHTML = `
-        <h1>من نحن</h1>
-        <div class="card">
-          <p>نحن فريق أثر، نهدف إلى تطوير العملية التعليمية وتسهيل التعلم للطلاب.</p>
-        </div>`;
-      break;
-    case 'contact':
-      content.innerHTML = `
-        <h1>لتواصل والاستفسار</h1>
-        <div class="card">
-          <p>يمكنك التواصل معنا عبر البريد الإلكتروني أو وسائل التواصل الخاصة بنا.</p>
-        </div>`;
-      break;
-  }
+toggleMenu();
+let content=document.getElementById("content");
+
+if(section==="free-groups"){
+content.innerHTML=`
+<h1>مجموعات المبادرة المجانية للصف الثاني عشر</h1>
+<div class="card">
+  <p>اختر المجموعة التي ترغب بالانضمام إليها:</p>
+  <div class="group-buttons">
+    <button onclick="window.open('https://chat.whatsapp.com/EWCpAMdN7Dw2126xIATX1X?mode=gi_t','_blank')">مجموعة اللغة العربية</button>
+    <button onclick="window.open('https://chat.whatsapp.com/GKZEZqXgkSTJyefWCSn6ks?mode=gi_t','_blank')">مجموعة اللغة الإنجليزية</button>
+    <button onclick="window.open('https://chat.whatsapp.com/FtEDME1S8rb5ffhH41Vy4b?mode=gi_t','_blank')">مجموعة الرياضيات الأساسية</button>
+    <button onclick="window.open('https://chat.whatsapp.com/KEM5XTXhjFK3HvBygwFde9?mode=gi_t','_blank')">مجموعة الرياضيات المتقدمة</button>
+    <button onclick="window.open('https://chat.whatsapp.com/Kr6AG4B5TiO41NyRAxHClj?mode=gi_t','_blank')">مجموعة الفيزياء</button>
+    <button onclick="window.open('https://chat.whatsapp.com/FU4zUtwxwkaJHa99IhiZKv?mode=gi_t','_blank')">مجموعة الكيمياء</button>
+    <button onclick="window.open('https://chat.whatsapp.com/FbtcuHvxPO422XeT8kqRG9?mode=gi_t','_blank')">مجموعة الأحياء</button>
+    <button onclick="window.open('https://chat.whatsapp.com/KApApJY5uiW2ME8b95y8vq?mode=gi_t','_blank')">مجموعة العلوم البيئية</button>
+    <button onclick="window.open('https://chat.whatsapp.com/LE0Erlr5CbO725iL61sgND?mode=gi_t','_blank')">مجموعة التربية الإسلامية</button>
+    <button onclick="window.open('https://chat.whatsapp.com/Kl0ynymFHLg73ItRmAsbmq?mode=gi_t','_blank')">مجموعة العالم من حولي</button>
+  </div>
+</div>
+`;
+addGroupButtonsAnimation();
+}
+
+if(section==="other-groups"){
+content.innerHTML=`
+<h1>المجموعات الأخرى</h1>
+<div class="card">
+  <p>اختر المجموعة التي ترغب بالانضمام إليها:</p>
+  <div class="group-buttons">
+    <button onclick="window.open('https://chat.whatsapp.com/HUu8LSA31EpBjs68pZvmRf?mode=gi_t','_blank')">المجموعة العـامـة 2026</button>
+    <button onclick="window.open('https://chat.whatsapp.com/EQDFxOrzQli8KfYt3cqaj5?mode=gi_t','_blank')">المجموعة العـامـة 2027</button>
+    <button onclick="window.open('https://chat.whatsapp.com/Bbz2EaW9JMZE9uNmqVreE2?mode=gi_t','_blank')">المجموعة العـامـة 2028</button>
+    <button onclick="window.open('https://chat.whatsapp.com/FPB4KOmbfek1m9ECRzgTjp?mode=gi_t','_blank')">المجموعة العـامـة 2029</button>
+    <button onclick="window.open('https://chat.whatsapp.com/J4rPjXKjOzj01s542JLecD?mode=gi','_blank')">مجموعة المُرشِد للجامعات والكليات</button>
+    <button onclick="window.open('https://chat.whatsapp.com/I31DWY7LnksBuIjmW1rhUv?mode=gi_t','_blank')">مجموعة غيمة الذكر</button>
+  </div>
+</div>
+`;
+addGroupButtonsAnimation();
+}
+
+if(section==="files"){
+content.innerHTML=`
+<h1>الملفات</h1>
+<div class="card">
+<p>اختر الصف للملفات المطلوبة:</p>
+<div class="group-buttons">
+  <!-- الصفوف كرابط مباشر -->
+  <button onclick="window.open('https://drive.google.com/drive/folders/1XUFl5ftQxEG1WNKGzziM3Eovxh4-8vlE','_blank')">الصف الخامس</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1XZbbCZW3q81Pd17ab1M-aw6XqWLIBd0A','_blank')">الصف السادس</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1Xf2C-TD7v5mOqys3bigFW-3YiyumM9V7','_blank')">الصف السابع</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1XfK916QHk1svovt7KwoRXius59mRSI-I','_blank')">الصف الثامن</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1T76xUUElXqpHGi7m2tv1Mr9ZEg593aI_','_blank')">الصف التاسع</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1F-Z9rf96fL4_1UW87gj3I7pE2oiGYRiR','_blank')">الصف العاشر</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1a09DbmtSPV01sWxM8z9tDAtgH75njG4S','_blank')">الصف الحادي عشر</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1f5moTunuLdvaAPLz_zA3mhnHf8m1uY1G','_blank')">الصف الثاني عشر</button>
+
+  <h3 style="margin-top:25px;">ملفات عامة</h3>
+  <button onclick="window.open('https://drive.google.com/drive/folders/17VIxd1vF4hUQ2OBYt8ikbvLNTAz-R8Mu','_blank')">جداول المذاكرة</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1JvCkUUm_NXg88kNlfdX5mTY8CpunFtO-','_blank')">دليل الطالب</button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1oHXUvLyCgUavfBenRvbKRzK8w2krbqO3','_blank')">عروض شفوية</button>
+</div>
+</div>
+`;
+addGroupButtonsAnimation();
+}
+
+if(section==="contact"){
+content.innerHTML=`
+<h1>التواصل والاستفسار</h1>
+<div class="card">
+<p>للانضمام إلى قناة التواصل الرسمية أو متابعة حساب فريق أثر على الإنستغرام:</p>
+<div class="group-buttons">
+  <button onclick="window.open('https://whatsapp.com/channel/0029Vb6dRC5EFeXmb5F3VT2a','_blank')">دخول القناة</button>
+  <button onclick="window.open('https://www.instagram.com/te_athar7?igsh=MXgweHE4eXNpMWo1Mg%3D%3D&utm_source=qr','_blank')">حساب فريق أثر</button>
+</div>
+</div>
+`;
+addGroupButtonsAnimation();
+}
+
+showCardsAnimation();
+}
+
+// أنميشن تدريجي للبطاقات
+function showCardsAnimation(){
+  let cards=document.querySelectorAll(".card");
+  cards.forEach((card,i)=>{
+    card.style.opacity="0";
+    card.style.transform="translateY(20px)";
+    setTimeout(()=>{
+      card.classList.add("show");
+    }, i*200);
+  });
+}
+
+// أنميشن تدريجي لأزرار المجموعات والملفات
+function addGroupButtonsAnimation(){
+  let buttons = document.querySelectorAll(".group-buttons button");
+  buttons.forEach((btn,i)=>{
+    btn.style.opacity=0;
+    btn.style.transform="translateY(20px)";
+    setTimeout(()=>{
+      btn.style.opacity=1;
+      btn.style.transform="translateY(0)";
+    }, i*150);
+  });
 }
 </script>
-
 </body>
 </html>
