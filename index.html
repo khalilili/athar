@@ -20,6 +20,9 @@ body{
   font-family:'Cairo',sans-serif;
   background:var(--bg);
   color:var(--text);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 
 /* صفحة البداية */
@@ -36,13 +39,20 @@ body{
   justify-content:center;
   z-index:3000;
   animation:fadeIn 1s ease forwards;
+  text-align:center;
 }
 
 #splash h1{
   font-size:64px;
-  margin-bottom:30px;
+  margin-bottom:20px;
   color:var(--text);
   animation:textPop 1s ease;
+}
+
+#splash p{
+  font-size:24px;
+  margin-bottom:30px;
+  color:var(--text);
 }
 
 #splash button{
@@ -141,6 +151,7 @@ body{
   color:var(--text);
   opacity:0;
   animation:contentFade 1s forwards;
+  flex:1;
 }
 
 .header-with-image{
@@ -210,7 +221,7 @@ ul{
   color:var(--text);
   font-weight:700;
   cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
   transition:0.3s;
   font-size:18px;
   text-align:right;
@@ -221,6 +232,16 @@ ul{
 .group-buttons button:hover{
   transform:translateY(-5px) scale(1.03);
   box-shadow:0 12px 25px rgba(0,0,0,0.5);
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  font-size:12px;
+  color:#aaa;
+  padding:15px 0;
+  background:transparent;
+  margin-top:auto;
 }
 
 /* أنميشنات */
@@ -250,8 +271,9 @@ ul{
 
 <!-- صفحة البداية -->
 <div id="splash">
-<h1>أثر</h1>
-<button onclick="startApp()">ابدأ</button>
+  <h1>أهلاً بك في منصة أثر</h1>
+  <p>اكتشف المجموعات والملفات التعليمية بسهولة</p>
+  <button onclick="startApp()">ابدأ</button>
 </div>
 
 <!-- زر القائمة -->
@@ -268,175 +290,172 @@ ul{
 
 <!-- المحتوى الرئيسي -->
 <div class="content" id="content" style="display:none;">
-<div class="header-with-image">
-  <img src="logo.png" alt="شعار الموقع" id="logo.png">
-  <h1>موقع أثر</h1>
+  <div class="header-with-image">
+    <img src="logo.png" alt="شعار الموقع" id="logo.png">
+    <h1>موقع أثر</h1>
+  </div>
+
+  <div class="card">
+    <h2>من هو فريق أثر؟</h2>
+    <p>فريق أثر هو فريق طلابي يضم العديد من الطلبة المتميزين، يعملون معًا على ترك الأثر ونشر الفائدة.</p>
+  </div>
+
+  <div class="card">
+    <h2>إلى ماذا يهدف فريق أثر؟</h2>
+    <p>يهدف الفريق إلى تصميم الملخصات الدراسية والارتقاء بمستوى الطالب.</p>
+  </div>
+
+  <div class="card">
+    <h2>خدماتنا</h2>
+    <ul>
+      <li>تصميم وتطوير المناهج التعليمية</li>
+      <li>تقديم ورش عمل ودورات تدريبية</li>
+      <li>استشارات تعليمية لكافة الطلبة</li>
+      <li>تطوير أدوات تعليمية تفاعلية</li>
+    </ul>
+  </div>
 </div>
 
-<div class="card">
-<h2>من هو فريق أثر؟</h2>
-<p>فريق أثر هو فريق طلابي يضم العديد من الطلبة المتميزين، يعملون معًا على ترك الأثر ونشر الفائدة.</p>
-</div>
-
-<div class="card">
-<h2>إلى ماذا يهدف فريق أثر؟</h2>
-<p>يهدف الفريق إلى تصميم الملخصات الدراسية والارتقاء بمستوى الطالب.</p>
-</div>
-
-<div class="card">
-<h2>خدماتنا</h2>
-<ul>
-<li>تصميم وتطوير المناهج التعليمية</li>
-<li>تقديم ورش عمل ودورات تدريبية</li>
-<li>استشارات تعليمية لكافة الطلبة</li>
-<li>تطوير أدوات تعليمية تفاعلية</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>رؤيتنا</h2>
-<p>أن نكون روادًا في توفير تجربة تعليمية محفزة تعزز حب الدراسة والتعلم، من خلال بناء بيئة معرفية ملهمة وإبداعية، تعتمد على تطوير سلاسل تعليمية وملخصات مبسطة وفعالة تسقل المفاهيم وتنمي مهارات التفكير والتعلم الذاتي.</p>
-</div>
-
-<div class="card">
-<h2>رسالتنا</h2>
-<p>توفير بيئة تعليمية محفزة وداعمة تعتمد على أحدث الأساليب التربوية والتقنيات الحديثة، إضافة إلى السلاسل والملفات التعليمية التي تساعد الطالب في مسيرته التعليمية.</p>
-</div>
-</div>
+<!-- Footer -->
+<footer>هذه المنصة مجانية بشكل كامل ولا يحق لاحد استخدامها لاغراض تجارية ! الحقوق محفوظة فريق أثر 2026</footer>
 
 <script>
 let sidebar=document.getElementById("sidebar");
 let mainContent = document.getElementById("content").innerHTML;
 
-// بدء التطبيق من صفحة البداية
+// بدء التطبيق عند الضغط على زر "ابدأ"
 function startApp(){
   document.getElementById("splash").style.display="none";
   document.getElementById("content").style.display="block";
-  localStorage.setItem("started","true"); 
   showCardsAnimation();
 }
 
-// تحقق عند فتح الموقع
-window.onload=function(){
-  if(localStorage.getItem("started")){
-    document.getElementById("splash").style.display="none";
-    document.getElementById("content").style.display="block";
-    showCardsAnimation();
-  }
+// عند تحميل الصفحة: عرض صفحة البداية دائمًا
+window.onload = function(){
+  document.getElementById("splash").style.display = "flex";
+  document.getElementById("content").style.display = "none";
 }
 
+// القائمة الجانبية
 function toggleMenu(){
-sidebar.classList.toggle("show");
-sidebar.style.right = sidebar.style.right==="0px" ? "-320px" : "0px";
+  sidebar.classList.toggle("show");
+  sidebar.style.right = sidebar.style.right==="0px" ? "-320px" : "0px";
 }
 
 document.addEventListener("click",function(e){
-let btn=document.querySelector(".menu-btn");
-if(sidebar.style.right==="0px"){
-if(!sidebar.contains(e.target) && !btn.contains(e.target)){
-sidebar.style.right="-320px";
-sidebar.classList.remove("show");
-}
-}
+  let btn=document.querySelector(".menu-btn");
+  if(sidebar.style.right==="0px"){
+    if(!sidebar.contains(e.target) && !btn.contains(e.target)){
+      sidebar.style.right="-320px";
+      sidebar.classList.remove("show");
+    }
+  }
 });
 
 function goHome(){
-document.getElementById("content").style.display="block";
-sidebar.style.right="-320px";
-sidebar.classList.remove("show");
-document.getElementById("content").innerHTML = mainContent;
-showCardsAnimation();
+  document.getElementById("content").style.display="block";
+  sidebar.style.right="-320px";
+  sidebar.classList.remove("show");
+  document.getElementById("content").innerHTML = mainContent;
+  fadeContent();
+  showCardsAnimation();
 }
 
 function showSection(section){
-toggleMenu();
-let content=document.getElementById("content");
-
-if(section==="free-groups"){
-content.innerHTML=`
+  toggleMenu();
+  let content=document.getElementById("content");
+  content.style.opacity=0; // fade out
+  setTimeout(()=>{
+    if(section==="free-groups"){
+      content.innerHTML=`
 <h1>مجموعات المبادرة المجانية للصف الثاني عشر</h1>
 <div class="card">
-  <p>اختر المجموعة التي ترغب بالانضمام إليها:</p>
-  <div class="group-buttons">
-    <button onclick="window.open('https://chat.whatsapp.com/EWCpAMdN7Dw2126xIATX1X?mode=gi_t','_blank')">مجموعة اللغة العربية</button>
-    <button onclick="window.open('https://chat.whatsapp.com/GKZEZqXgkSTJyefWCSn6ks?mode=gi_t','_blank')">مجموعة اللغة الإنجليزية</button>
-    <button onclick="window.open('https://chat.whatsapp.com/FtEDME1S8rb5ffhH41Vy4b?mode=gi_t','_blank')">مجموعة الرياضيات الأساسية</button>
-    <button onclick="window.open('https://chat.whatsapp.com/KEM5XTXhjFK3HvBygwFde9?mode=gi_t','_blank')">مجموعة الرياضيات المتقدمة</button>
-    <button onclick="window.open('https://chat.whatsapp.com/Kr6AG4B5TiO41NyRAxHClj?mode=gi_t','_blank')">مجموعة الفيزياء</button>
-    <button onclick="window.open('https://chat.whatsapp.com/FU4zUtwxwkaJHa99IhiZKv?mode=gi_t','_blank')">مجموعة الكيمياء</button>
-    <button onclick="window.open('https://chat.whatsapp.com/FbtcuHvxPO422XeT8kqRG9?mode=gi_t','_blank')">مجموعة الأحياء</button>
-    <button onclick="window.open('https://chat.whatsapp.com/KApApJY5uiW2ME8b95y8vq?mode=gi_t','_blank')">مجموعة العلوم البيئية</button>
-    <button onclick="window.open('https://chat.whatsapp.com/LE0Erlr5CbO725iL61sgND?mode=gi_t','_blank')">مجموعة التربية الإسلامية</button>
-    <button onclick="window.open('https://chat.whatsapp.com/Kl0ynymFHLg73ItRmAsbmq?mode=gi_t','_blank')">مجموعة العالم من حولي</button>
-  </div>
+<p>اختر المجموعة التي ترغب بالانضمام إليها:</p>
+<div class="group-buttons">
+<button onclick="window.open('https://chat.whatsapp.com/EWCpAMdN7Dw2126xIATX1X?mode=gi_t','_blank')">مجموعة اللغة العربية</button>
+<button onclick="window.open('https://chat.whatsapp.com/GKZEZqXgkSTJyefWCSn6ks?mode=gi_t','_blank')">مجموعة اللغة الإنجليزية</button>
+<button onclick="window.open('https://chat.whatsapp.com/FtEDME1S8rb5ffhH41Vy4b?mode=gi_t','_blank')">مجموعة الرياضيات الأساسية</button>
+<button onclick="window.open('https://chat.whatsapp.com/KEM5XTXhjFK3HvBygwFde9?mode=gi_t','_blank')">مجموعة الرياضيات المتقدمة</button>
+<button onclick="window.open('https://chat.whatsapp.com/Kr6AG4B5TiO41NyRAxHClj?mode=gi_t','_blank')">مجموعة الفيزياء</button>
+<button onclick="window.open('https://chat.whatsapp.com/FU4zUtwxwkaJHa99IhiZKv?mode=gi_t','_blank')">مجموعة الكيمياء</button>
+<button onclick="window.open('https://chat.whatsapp.com/FbtcuHvxPO422XeT8kqRG9?mode=gi_t','_blank')">مجموعة الأحياء</button>
+<button onclick="window.open('https://chat.whatsapp.com/KApApJY5uiW2ME8b95y8vq?mode=gi_t','_blank')">مجموعة العلوم البيئية</button>
+<button onclick="window.open('https://chat.whatsapp.com/LE0Erlr5CbO725iL61sgND?mode=gi_t','_blank')">مجموعة التربية الإسلامية</button>
+<button onclick="window.open('https://chat.whatsapp.com/Kl0ynymFHLg73ItRmAsbmq?mode=gi_t','_blank')">مجموعة العالم من حولي</button>
+</div>
 </div>
 `;
-addGroupButtonsAnimation();
-}
+    }
 
-if(section==="other-groups"){
-content.innerHTML=`
+    if(section==="other-groups"){
+      content.innerHTML=`
 <h1>المجموعات الأخرى</h1>
 <div class="card">
-  <p>اختر المجموعة التي ترغب بالانضمام إليها:</p>
-  <div class="group-buttons">
-    <button onclick="window.open('https://chat.whatsapp.com/HUu8LSA31EpBjs68pZvmRf?mode=gi_t','_blank')">المجموعة العـامـة 2026</button>
-    <button onclick="window.open('https://chat.whatsapp.com/EQDFxOrzQli8KfYt3cqaj5?mode=gi_t','_blank')">المجموعة العـامـة 2027</button>
-    <button onclick="window.open('https://chat.whatsapp.com/Bbz2EaW9JMZE9uNmqVreE2?mode=gi_t','_blank')">المجموعة العـامـة 2028</button>
-    <button onclick="window.open('https://chat.whatsapp.com/FPB4KOmbfek1m9ECRzgTjp?mode=gi_t','_blank')">المجموعة العـامـة 2029</button>
-    <button onclick="window.open('https://chat.whatsapp.com/J4rPjXKjOzj01s542JLecD?mode=gi','_blank')">مجموعة المُرشِد للجامعات والكليات</button>
-    <button onclick="window.open('https://chat.whatsapp.com/I31DWY7LnksBuIjmW1rhUv?mode=gi_t','_blank')">مجموعة غيمة الذكر</button>
-  </div>
+<p>اختر المجموعة التي ترغب بالانضمام إليها:</p>
+<div class="group-buttons">
+<button onclick="window.open('https://chat.whatsapp.com/HUu8LSA31EpBjs68pZvmRf?mode=gi_t','_blank')">المجموعة العـامـة 2026</button>
+<button onclick="window.open('https://chat.whatsapp.com/EQDFxOrzQli8KfYt3cqaj5?mode=gi_t','_blank')">المجموعة العـامـة 2027</button>
+<button onclick="window.open('https://chat.whatsapp.com/Bbz2EaW9JMZE9uNmqVreE2?mode=gi_t','_blank')">المجموعة العـامـة 2028</button>
+<button onclick="window.open('https://chat.whatsapp.com/FPB4KOmbfek1m9ECRzgTjp?mode=gi_t','_blank')">المجموعة العـامـة 2029</button>
+<button onclick="window.open('https://chat.whatsapp.com/J4rPjXKjOzj01s542JLecD?mode=gi','_blank')">مجموعة المُرشِد للجامعات والكليات</button>
+<button onclick="window.open('https://chat.whatsapp.com/I31DWY7LnksBuIjmW1rhUv?mode=gi_t','_blank')">مجموعة غيمة الذكر</button>
+</div>
 </div>
 `;
-addGroupButtonsAnimation();
-}
+    }
 
-if(section==="files"){
-content.innerHTML=`
+    if(section==="files"){
+      content.innerHTML=`
 <h1>الملفات</h1>
 <div class="card">
 <p>اختر الصف للملفات المطلوبة:</p>
 <div class="group-buttons">
-  <button onclick="window.open('https://drive.google.com/drive/folders/1XUFl5ftQxEG1WNKGzziM3Eovxh4-8vlE','_blank')">الصف الخامس</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1XZbbCZW3q81Pd17ab1M-aw6XqWLIBd0A','_blank')">الصف السادس</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1Xf2C-TD7v5mOqys3bigFW-3YiyumM9V7','_blank')">الصف السابع</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1XfK916QHk1svovt7KwoRXius59mRSI-I','_blank')">الصف الثامن</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1T76xUUElXqpHGi7m2tv1Mr9ZEg593aI_','_blank')">الصف التاسع</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1F-Z9rf96fL4_1UW87gj3I7pE2oiGYRiR','_blank')">الصف العاشر</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1a09DbmtSPV01sWxM8z9tDAtgH75njG4S','_blank')">الصف الحادي عشر</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1f5moTunuLdvaAPLz_zA3mhnHf8m1uY1G','_blank')">الصف الثاني عشر</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1XUFl5ftQxEG1WNKGzziM3Eovxh4-8vlE','_blank')">الصف الخامس</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1XZbbCZW3q81Pd17ab1M-aw6XqWLIBd0A','_blank')">الصف السادس</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1Xf2C-TD7v5mOqys3bigFW-3YiyumM9V7','_blank')">الصف السابع</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1XfK916QHk1svovt7KwoRXius59mRSI-I','_blank')">الصف الثامن</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1T76xUUElXqpHGi7m2tv1Mr9ZEg593aI_','_blank')">الصف التاسع</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1F-Z9rf96fL4_1UW87gj3I7pE2oiGYRiR','_blank')">الصف العاشر</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1a09DbmtSPV01sWxM8z9tDAtgH75njG4S','_blank')">الصف الحادي عشر</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1f5moTunuLdvaAPLz_zA3mhnHf8m1uY1G','_blank')">الصف الثاني عشر</button>
 
-  <h3 style="margin-top:25px;">ملفات عامة</h3>
-  <button onclick="window.open('https://drive.google.com/drive/folders/17VIxd1vF4hUQ2OBYt8ikbvLNTAz-R8Mu','_blank')">جداول المذاكرة</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1JvCkUUm_NXg88kNlfdX5mTY8CpunFtO-','_blank')">دليل الطالب</button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1oHXUvLyCgUavfBenRvbKRzK8w2krbqO3','_blank')">عروض شفوية</button>
+<h3>ملفات عامة</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/17VIxd1vF4hUQ2OBYt8ikbvLNTAz-R8Mu','_blank')">جداول المذاكرة</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1JvCkUUm_NXg88kNlfdX5mTY8CpunFtO-','_blank')">دليل الطالب</button>
+<button onclick="window.open('https://drive.google.com/drive/folders/1oHXUvLyCgUavfBenRvbKRzK8w2krbqO3','_blank')">عروض شفوية</button>
 </div>
 </div>
 `;
-addGroupButtonsAnimation();
-}
+    }
 
-if(section==="contact"){
-content.innerHTML=`
+    if(section==="contact"){
+      content.innerHTML=`
 <h1>التواصل والاستفسار</h1>
 <div class="card">
-<p>للانضمام إلى قناة التواصل الرسمية أو متابعة حساب فريق أثر على الإنستغرام، أو نسخ بيانات التواصل:</p>
+<p>للانضمام إلى قناة التواصل الرسمية أو متابعة حساب فريق أثر على الإنستغرام أو نسخ بيانات التواصل:</p>
 <div class="group-buttons">
-  <button onclick="window.open('https://whatsapp.com/channel/0029Vb6dRC5EFeXmb5F3VT2a','_blank')">دخول القناة</button>
-  <button onclick="window.open('https://www.instagram.com/te_athar7?igsh=MXgweHE4eXNpMWo1Mg%3D%3D&utm_source=qr','_blank')">حساب فريق أثر</button>
-  <button onclick="copyToClipboard('96898993583')">نسخ رقم الواتس أب</button>
-  <button onclick="copyToClipboard('elitet072@gmail.com')">نسخ إيميل الفريق</button>
+<button onclick="window.open('https://www.instagram.com/te_athar7','_blank')">حساب إنستغرام</button>
+<button onclick="copyToClipboard('info@athar2026.com')">نسخ البريد الإلكتروني</button>
+<button onclick="window.open('https://whatsapp.com/channel/0029Vb6dRC5EFeXmb5F3VT2a','_blank')">الانضمام لمجموعة الواتساب</button>
+<button onclick="copyToClipboard('98993583')">نسخ رقم الواتس أب</button>
 </div>
 </div>
 `;
-addGroupButtonsAnimation();
+    }
+
+    fadeContent();
+    addGroupButtonsAnimation();
+    showCardsAnimation();
+  },200);
 }
 
-showCardsAnimation();
+function fadeContent(){
+  let content=document.getElementById("content");
+  content.style.transition="opacity 0.5s";
+  content.style.opacity=1;
 }
 
-// أنميشن تدريجي للبطاقات
+// أنميشن البطاقات
 function showCardsAnimation(){
   let cards=document.querySelectorAll(".card");
   cards.forEach((card,i)=>{
@@ -448,9 +467,9 @@ function showCardsAnimation(){
   });
 }
 
-// أنميشن تدريجي لأزرار المجموعات والملفات
+// أنميشن أزرار المجموعات
 function addGroupButtonsAnimation(){
-  let buttons = document.querySelectorAll(".group-buttons button");
+  let buttons=document.querySelectorAll(".group-buttons button");
   buttons.forEach((btn,i)=>{
     btn.style.opacity=0;
     btn.style.transform="translateY(20px)";
@@ -461,7 +480,7 @@ function addGroupButtonsAnimation(){
   });
 }
 
-// دالة النسخ إلى الحافظة
+// نسخ للنص
 function copyToClipboard(text){
   navigator.clipboard.writeText(text).then(()=>{
     alert('تم نسخ: ' + text);
